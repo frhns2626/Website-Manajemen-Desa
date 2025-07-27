@@ -43,33 +43,14 @@
                             <label for="jenis_kelamin">Jenis Kelamin :</label>
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-control @error('jenis_kelamin') is-invalid @enderror" required>
-                                @foreach ([
-                                (object)
-                                [
-                                    'label' => '-- Pilih --',
-                                    'value' => '',
-                                ],
-                                (object) [
-                                    'label' => 'Laki-Laki',
-                                    'value' => 'Laki-Laki',
-                                ],
-                                (object) [
-                                    'label' => 'Perempuan',
-                                    'value' => 'Perempuan',
-                                ],
-                                    ] as $item)
-                                    <option value="{{ $item->value }}" @selected(old('jenis_kelamin') == $item->value)> {{ $item->label }}
-                                    </option>
-                                @endforeach
-
-                                {{-- <option value="">-- Pilih --</option>
+                                <option value="">-- Pilih --</option>
                                 <option value="Laki-Laki">Laki-Laki</option>
-                                <option value="Perempuan">Perempuan</option> --}}
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                             @error('jenis_kelamin')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
-                                </div>
+                        </div>
                         <div class="form-group mb-3">
                             <label for="tempat_lahir">Tempat Lahir :</label>
                             <input type="text" name="tempat_lahir" id="tempat_lahir"
@@ -109,29 +90,11 @@
                             <label for="status_perkawinan">Status :</label>
                             <select name="status_perkawinan" id="status_perkawinan"
                                 class="form-control @error('status_perkawinan') is-invalid @enderror" required>
-                                @foreach ( as )
-                                    
-                                @endforeach
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                {{-- <option value="">-- Pilih --</option>
+                                <option value="">-- Pilih --</option>
                                 <option value="belum kawin">Belum Kawin</option>
                                 <option value="kawin">Kawin</option>
                                 <option value="cerai hidup">Cerai Hidup</option>
-                                <option value="cerai mati">Cerai Mati</option> --}}
+                                <option value="cerai mati">Cerai Mati</option>
                             </select>
                             @error('status_perkawinan')
                                 <span class="invalid-feedback">{{ $message }}</span>
