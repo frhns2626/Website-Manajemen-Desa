@@ -15,4 +15,4 @@ Route::get('/penduduk/create', [PendudukController::class, 'create']);
 Route::get('/penduduk/{id}', [PendudukController::class, 'edit']);
 Route::post('/penduduk', [PendudukController::class, 'store']);
 Route::put('/penduduk/{id}', [PendudukController::class, 'update']);
-Route::delete('/penduduk/{id}', [PendudukController::class, 'delete']);
+Route::delete('/penduduk/{id}', [PendudukController::class, 'destroy']);

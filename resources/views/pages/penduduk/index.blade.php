@@ -17,6 +17,7 @@
                     <table class="table table-responsive table-bordered table-hover">
                         <thead class="text-dark bg-gray-400">
                             <tr>
+                                <th class="px-4 py-2">NO</th>
                                 <th class="px-4 py-2">NIK</th>
                                 <th class="px-4 py-2">KK</th>
                                 <th class="px-4 py-2">Nama</th>
@@ -43,6 +44,7 @@
                             <tbody>
                                 @foreach ($penduduks as $item)
                                     <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->nik }}</td>
                                         <td>{{ $item->kk }}</td>
                                         <td>{{ $item->name }}</td>
@@ -62,12 +64,14 @@
                                                     class="d-inline-block mr-2 btn btn-sm btn-warning">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
-                                                <a href="/penduduk/{{ $item->id }}" class="btn btn-sm btn-danger">
+                                                <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
+                                                    data-bs-target="#confirmationDelete-{{ $item->id }}">
                                                     <i class="fas fa-trash"></i>
-                                                </a>
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
+                                    @include('pages.penduduk.konfirmasi-hapus')
                                 @endforeach
                             </tbody>
                         @endif
