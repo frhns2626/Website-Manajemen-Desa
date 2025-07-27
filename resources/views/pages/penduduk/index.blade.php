@@ -47,7 +47,9 @@
                                         <td>{{ $item->kk }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>
-                                        <td>{{ $item->tempat_lahir }}, {{ $item->tanggal_lahir }} </td>
+                                        <td>{{ $item->tempat_lahir }},
+                                            {{ \Carbon\Carbon::parse($item->tanggal_lahir)->translatedFormat('d F Y') }}
+                                        </td>
                                         <td>{{ $item->alamat }}</td>
                                         <td>{{ $item->agama }}</td>
                                         <td>{{ $item->status_perkawinan }}</td>
@@ -56,18 +58,17 @@
                                         <td>{{ $item->status_tinggal }}</td>
                                         <td>
                                             <div class="d-flex">
-                                                <a href="/penduduk/{id}"
-                                                    class="d-inline-block mr   -2 btn btn-sm btn-warning">
+                                                <a href="/penduduk/{{ $item->id }}"
+                                                    class="d-inline-block mr-2 btn btn-sm btn-warning">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
-                                                <a href="/penduduk/{id}" class="btn btn-sm btn-danger">
+                                                <a href="/penduduk/{{ $item->id }}" class="btn btn-sm btn-danger">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>
                                         </td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         @endif
                     </table>

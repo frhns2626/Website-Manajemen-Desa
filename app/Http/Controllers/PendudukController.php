@@ -22,22 +22,22 @@ class PendudukController extends Controller
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $validatedData = $request->validate([
             'nik'              => 'required|digits:16',
             'kk'               => 'required|digits:16',
-            'nama'             => 'required|string|max:255',
-            'jenis_kelamin'    => 'required|in:pria,wanita',
+            'name'             => 'required|string|max:255',
+            'jenis_kelamin'    => 'required|in:Laki-Laki,Perempuan',
             'tempat_lahir'     => 'required|string|max:100',
             'tanggal_lahir'    => 'required|date',
             'alamat'           => 'required|string',
             'agama'            => 'required|string|max:50',
-            'status_perkawinan' => 'required|in:belum_kawin,kawin,cerai',
-            'pekerjaan'        => 'required|string|max:100',
-            'pendidikan'       => 'required|string|max:100',
+            'status_perkawinan' => 'required|in:belum kawin,kawin,cerai hidup,cerai mati',
+            'pekerjaan'        => 'required|in:Belum/Tidak Bekerja,Pelajar/Mahasiswa,Mengurus Rumah Tangga,Pegawai Negeri Sipil (PNS),TNI,Polri,Karyawan Swasta,Karyawan BUMN,Petani/Pekebun,Pedagang,Nelayan,Wiraswasta,Guru,Dosen,Dokter,Perawat,Sopir,Buruh Harian Lepas,Tukang Bangunan,Pensiunan,Lainnya',
+            'pendidikan'       => 'required|in:Tidak Sekolah,Belum Tamat SD / Sederajat,SD / MI,SMP / SLTP Sederajat,SMA / SLTA Sederajat,D1,D2,D3,D4 / S1,S2,S3',
             'status_tinggal'   => 'required|in:tetap,pendatang,pindah,meninggal',
         ]);
 
-        Penduduk::create($request->validated());
+        Penduduk::create($validatedData);
 
         return redirect('/penduduk')->with('success', 'Berhasil menambahkan data');
     }
@@ -46,7 +46,7 @@ class PendudukController extends Controller
     {
         $penduduk = Penduduk::findOrFail($id);
         return view('pages.penduduk.edit', [
-            'penduduk' => $penduduk
+            'penduduk' => $penduduk,
         ]);
     }
 

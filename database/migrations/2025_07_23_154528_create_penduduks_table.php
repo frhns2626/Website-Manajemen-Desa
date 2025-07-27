@@ -16,14 +16,14 @@ return new class extends Migration
             $table->string('nik', 16);
             $table->string('kk', 16);
             $table->string('name', 255);
-            $table->enum('jenis_kelamin', ['pria','wanita']);
+            $table->enum('jenis_kelamin', ['Laki-Laki','Perempuan']);
             $table->string('tempat_lahir', 100);
             $table->date('tanggal_lahir');
             $table->text('alamat');
             $table->string('agama', 50);
-            $table->enum('status_perkawinan', ['belum_kawin','kawin', 'cerai']);
+            $table->enum('status_perkawinan', ['belum kawin','kawin', 'cerai hidup', 'cerai mati']);
             $table->string('pekerjaan', 100);
-            $table->string('pendidikan', 100);
+            $table->string('pendidikan', 50);
             $table->enum('status_tinggal', ['tetap','pendatang', 'pindah', 'meninggal'])->default('tetap');
             $table->timestamps();
         });
