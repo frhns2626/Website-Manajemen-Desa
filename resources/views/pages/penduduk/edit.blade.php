@@ -83,9 +83,25 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="agama">Agama :</label>
-                            <input type="text" name="agama" id="agama"
-                                class="form-control @error('agama') is-invalid @enderror"
-                                value="{{ old('agama', $penduduk->agama) }}" required>
+                            <select name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror"
+                                required>
+                                <option value="">-- Pilih --</option>
+                                <option value="islam" {{ old('agama', $penduduk->agama) == 'islam' ? 'selected' : '' }}>
+                                    Islam</option>
+                                <option value="kristen"{{ old('agama', $penduduk->agama) == 'kristen' ? 'selected' : '' }}>
+                                    Kristen Protestan
+                                </option>
+                                <option value="katolik"{{ old('agama', $penduduk->agama) == 'katolik' ? 'selected' : '' }}>
+                                    Katolik</option>
+                                <option value="hindu"{{ old('agama', $penduduk->agama) == 'hindu' ? 'selected' : '' }}>
+                                    Hindu</option>
+                                <option value="buddha"{{ old('agama', $penduduk->agama) == 'buddha' ? 'selected' : '' }}>
+                                    Buddha</option>
+                                <option
+                                    value="konghucu"{{ old('agama', $penduduk->agama) == 'konghucu' ? 'selected' : '' }}>
+                                    Konghucu
+                                </option>
+                            </select>
                             @error('agama')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror

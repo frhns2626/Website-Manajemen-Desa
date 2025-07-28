@@ -44,8 +44,10 @@
                             <select name="jenis_kelamin" id="jenis_kelamin"
                                 class="form-control @error('jenis_kelamin') is-invalid @enderror" required>
                                 <option value="">-- Pilih --</option>
-                                <option value="Laki-Laki">Laki-Laki</option>
-                                <option value="Perempuan">Perempuan</option>
+                                <option value="Laki-Laki" {{ old('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>
+                                    Laki-Laki</option>
+                                <option value="Perempuan" {{ old('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>
+                                    Perempuan</option>
                             </select>
                             @error('jenis_kelamin')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -71,17 +73,25 @@
                         </div>
                         <div class="form-group mb-3">
                             <label for="alamat">Alamat :</label>
-                            <textarea name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror"
-                                value="{{ old('alamat') }}" required></textarea>
+                            <textarea name="alamat" id="alamat" class="form-control @error('alamat') is-invalid @enderror" required>{{ old('alamat') }}</textarea>
                             @error('alamat')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                         <div class="form-group mb-3">
                             <label for="agama">Agama :</label>
-                            <input type="text" name="agama" id="agama"
-                                class="form-control @error('agama') is-invalid @enderror" value="{{ old('agama') }}"
+                            <select name="agama" id="agama" class="form-control @error('agama') is-invalid @enderror"
                                 required>
+                                <option value="">-- Pilih --</option>
+                                <option value="islam" {{ old('agama') == 'islam' ? 'selected' : '' }}>Islam</option>
+                                <option value="kristen"{{ old('agama') == 'kristen' ? 'selected' : '' }}>Kristen Protestan
+                                </option>
+                                <option value="katolik"{{ old('agama') == 'katolik' ? 'selected' : '' }}>Katolik</option>
+                                <option value="hindu"{{ old('agama') == 'hindu' ? 'selected' : '' }}>Hindu</option>
+                                <option value="buddha"{{ old('agama') == 'buddha' ? 'selected' : '' }}>Buddha</option>
+                                <option value="konghucu"{{ old('agama') == 'konghucu' ? 'selected' : '' }}>Konghucu
+                                </option>
+                            </select>
                             @error('agama')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
@@ -89,12 +99,19 @@
                         <div class="form-group mb-3">
                             <label for="status_perkawinan">Status :</label>
                             <select name="status_perkawinan" id="status_perkawinan"
-                                class="form-control @error('status_perkawinan') is-invalid @enderror" required>
+                                class="form-control @error('status_perkawinan') is-invalid @enderror">
                                 <option value="">-- Pilih --</option>
-                                <option value="belum kawin">Belum Kawin</option>
-                                <option value="kawin">Kawin</option>
-                                <option value="cerai hidup">Cerai Hidup</option>
-                                <option value="cerai mati">Cerai Mati</option>
+                                <option value="belum kawin"
+                                    {{ old('status_perkawinan') == 'belum kawin' ? 'selected' : '' }}>
+                                    Belum Kawin</option>
+                                <option value="kawin" {{ old('status_perkawinan') == 'kawin' ? 'selected' : '' }}>
+                                    Kawin</option>
+                                <option value="cerai hidup"
+                                    {{ old('status_perkawinan') == 'cerai hidup' ? 'selected' : '' }}>
+                                    Cerai Hidup</option>
+                                <option value="cerai mati"
+                                    {{ old('status_perkawinan') == 'cerai mati' ? 'selected' : '' }}>
+                                    Cerai Mati</option>
                             </select>
                             @error('status_perkawinan')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -105,27 +122,57 @@
                             <select name="pekerjaan" id="pekerjaan"
                                 class="form-control @error('pekerjaan') is-invalid @enderror" required>
                                 <option value="">-- Pilih --</option>
-                                <option value="Belum/Tidak Bekerja">Belum/Tidak Bekerja</option>
-                                <option value="Pelajar/Mahasiswa">Pelajar/Mahasiswa</option>
-                                <option value="Mengurus Rumah Tangga">Mengurus Rumah Tangga</option>
-                                <option value="Pegawai Negeri Sipil (PNS)">Pegawai Negeri Sipil (PNS)</option>
-                                <option value="TNI">TNI</option>
-                                <option value="Polri">Polri</option>
-                                <option value="Karyawan Swasta">Karyawan Swasta</option>
-                                <option value="Karyawan BUMN">Karyawan BUMN</option>
-                                <option value="Petani/Pekebun">Petani/Pekebun</option>
-                                <option value="Pedagang">Pedagang</option>
-                                <option value="Nelayan">Nelayan</option>
-                                <option value="Wiraswasta">Wiraswasta</option>
-                                <option value="Guru">Guru</option>
-                                <option value="Dosen">Dosen</option>
-                                <option value="Dokter">Dokter</option>
-                                <option value="Perawat">Perawat</option>
-                                <option value="Sopir">Sopir</option>
-                                <option value="Buruh Harian Lepas">Buruh Harian Lepas</option>
-                                <option value="Tukang Bangunan">Tukang Bangunan</option>
-                                <option value="Pensiunan">Pensiunan</option>
-                                <option value="Lainnya">Lainnya</option>
+                                <option value="Belum/Tidak Bekerja"
+                                    {{ old('pekerjaan') == 'Belum/Tidak Bekerja' ? 'selected' : '' }}>
+                                    Belum/Tidak Bekerja</option>
+                                <option value="Pelajar/Mahasiswa"
+                                    {{ old('pekerjaan') == 'Pelajar/Mahasiswa' ? 'selected' : '' }}>
+                                    Pelajar/Mahasiswa</option>
+                                <option value="Mengurus Rumah Tangga"
+                                    {{ old('pekerjaan') == 'Mengurus Rumah Tangga' ? 'selected' : '' }}>
+                                    Mengurus Rumah Tangga</option>
+                                <option value="Pegawai Negeri Sipil (PNS)"
+                                    {{ old('pekerjaan') == 'Pegawai Negeri Sipil (PNS)' ? 'selected' : '' }}>
+                                    Pegawai Negeri Sipil (PNS)</option>
+                                <option value="TNI" {{ old('pekerjaan') == 'TNI' ? 'selected' : '' }}>
+                                    TNI</option>
+                                <option value="Polri" {{ old('pekerjaan') == 'Polri' ? 'selected' : '' }}>
+                                    Polri</option>
+                                <option value="Karyawan Swasta"
+                                    {{ old('pekerjaan') == 'Karyawan Swasta' ? 'selected' : '' }}>
+                                    Karyawan Swasta</option>
+                                <option value="Karyawan BUMN" {{ old('pekerjaan') == 'Karyawan BUMN' ? 'selected' : '' }}>
+                                    Karyawan BUMN</option>
+                                <option value="Petani/Pekebun"
+                                    {{ old('pekerjaan') == 'Petani/Pekebun' ? 'selected' : '' }}>
+                                    Petani/Pekebun</option>
+                                <option value="Pedagang" {{ old('pekerjaan') == 'Pedagang' ? 'selected' : '' }}>
+                                    Pedagang</option>
+                                <option value="Nelayan"{{ old('pekerjaan') == 'Nelayan' ? 'selected' : '' }}>
+                                    Nelayan</option>
+                                <option value="Wiraswasta"
+                                    {{ old('pekerjaan') == 'Belum/Tidak Bekerja' ? 'selected' : '' }}>
+                                    Wiraswasta</option>
+                                <option value="Guru"{{ old('pekerjaan') == 'Guru' ? 'selected' : '' }}>
+                                    Guru</option>
+                                <option value="Dosen"{{ old('pekerjaan') == 'Dosen' ? 'selected' : '' }}>
+                                    Dosen</option>
+                                <option value="Dokter"{{ old('pekerjaan') == 'Dokter' ? 'selected' : '' }}>
+                                    Dokter</option>
+                                <option value="Perawat"{{ old('pekerjaan') == 'Perawat' ? 'selected' : '' }}>
+                                    Perawat</option>
+                                <option value="Sopir"{{ old('pekerjaan') == 'Sopir' ? 'selected' : '' }}>
+                                    Sopir</option>
+                                <option
+                                    value="Buruh Harian Lepas"{{ old('pekerjaan') == 'Buruh Harian Lepas' ? 'selected' : '' }}>
+                                    Buruh Harian Lepas</option>
+                                <option
+                                    value="Tukang Bangunan"{{ old('pekerjaan') == 'Tukang Bangunan' ? 'selected' : '' }}>
+                                    Tukang Bangunan</option>
+                                <option value="Pensiunan"{{ old('pekerjaan') == 'Pensiunan' ? 'selected' : '' }}>
+                                    Pensiunan</option>
+                                <option value="Lainnya"{{ old('pekerjaan') == 'Lainnya' ? 'selected' : '' }}>
+                                    Lainnya</option>
                             </select>
                             @error('pekerjaan')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -136,17 +183,36 @@
                             <select name="pendidikan" id="pendidikan"
                                 class="form-control @error('pendidikan') is-invalid @enderror" required>
                                 <option value="">-- Pilih --</option>
-                                <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                <option value="Belum Tamat SD / Sederajat">Belum Tamat SD / Sederajat</option>
-                                <option value="SD / MI">SD / MI</option>
-                                <option value="SMP / SLTP Sederajat">SMP / SLTP Sederajat</option>
-                                <option value="SMA / SLTA Sederajat">SMA / SLTA Sederajat</option>
-                                <option value="D1">Diploma I (D1)</option>
-                                <option value="D2">Diploma II (D2)</option>
-                                <option value="D3">Diploma III (D3)</option>
-                                <option value="D4 / S1">Sarjana (D4 / S1)</option>
-                                <option value="S2">Magister (S2)</option>
-                                <option value="S3">Doktor (S3)</option>
+                                <option value="Tidak Sekolah"
+                                    {{ old('pendidikan') == 'Tidak Sekolah' ? 'selected' : '' }}>
+                                    Tidak
+                                    Sekolah</option>
+                                <option value="Belum Tamat SD / Sederajat"
+                                    {{ old('pendidikan') == 'Belum Tamat SD / Sederajat' ? 'selected' : '' }}>
+                                    Belum
+                                    Tamat SD / Sederajat</option>
+                                <option value="SD / MI" {{ old('pendidikan') == 'SD / MI' ? 'selected' : '' }}>SD / MI
+                                </option>
+                                <option value="SMP / SLTP Sederajat"
+                                    {{ old('pendidikan') == 'SMP / SLTP Sederajat' ? 'selected' : '' }}>
+                                    SMP /
+                                    SLTP Sederajat</option>
+                                <option value="SMA / SLTA Sederajat"
+                                    {{ old('pendidikan') == 'SMA / SLTA Sederajat' ? 'selected' : '' }}>
+                                    SMA /
+                                    SLTA Sederajat</option>
+                                <option value="D1" {{ old('pendidikan') == 'D1' ? 'selected' : '' }}>Diploma I
+                                    (D1)</option>
+                                <option value="D2" {{ old('pendidikan') == 'D2' ? 'selected' : '' }}>Diploma
+                                    II (D2)</option>
+                                <option value="D3" {{ old('pendidikan') == 'D3' ? 'selected' : '' }}>Diploma
+                                    III (D3)</option>
+                                <option value="D4 / S1" {{ old('pendidikan') == 'D4 / S1' ? 'selected' : '' }}>Sarjana
+                                    (D4 / S1)</option>
+                                <option value="S2" {{ old('pendidikan') == 'S2' ? 'selected' : '' }}>Magister
+                                    (S2)</option>
+                                <option value="S3" {{ old('pendidikan') == 'S3' ? 'selected' : '' }}>Doktor
+                                    (S3)</option>
                             </select>
                             @error('pendidikan')
                                 <span class="invalid-feedback">{{ $message }}</span>
@@ -157,27 +223,34 @@
                             <select name="status_tinggal" id="status_tinggal"
                                 class="form-control @error('status_tinggal') is-invalid @enderror" required>
                                 <option value="">-- Pilih --</option>
-                                <option value="tetap">Tetap</option>
-                                <option value="pendatang">Pendatang</option>
-                                <option value="pindah">Pindah</option>
-                                <option value="meninggal">Meninggal</option>
+                                <option value="tetap" {{ old('status_tinggal') == 'tetap' ? 'selected' : '' }}>
+                                    Tetap
+                                </option>
+                                <option value="pendatang" {{ old('status_tinggal') == 'pendatang' ? 'selected' : '' }}>
+                                    Pendatang</option>
+                                <option value="pindah" {{ old('status_tinggal') == 'pindah' ? 'selected' : '' }}>
+                                    Pindah
+                                </option>
+                                <option value="meninggal" {{ old('status_tinggal') == 'meninggal' ? 'selected' : '' }}>
+                                    Meninggal</option>
                             </select>
                             @error('status_tinggal')
                                 <span class="invalid-feedback">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <div class="d-flex justify-content-end" style="gap: 10px">
-                            <a href="/penduduk" class="btn btn-outline-secondary">Kembali</a>
-                            <button type="submit" class="btn btn-primary">
-                                Simpan
-                            </button>
-                        </div>
+                </div>
+                <div class="card-footer">
+                    <div class="d-flex justify-content-end" style="gap: 10px">
+                        <a href="/penduduk" class="btn btn-outline-secondary">Kembali</a>
+                        <button type="submit" class="btn btn-primary">
+                            Simpan
+                        </button>
                     </div>
                 </div>
-            </form>
         </div>
+        </form>
+    </div>
     </div>
 
     <script>

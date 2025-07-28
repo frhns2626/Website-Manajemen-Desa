@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('tempat_lahir', 100);
             $table->date('tanggal_lahir');
             $table->text('alamat');
-            $table->string('agama', 50);
+            $table->enum('agama', ['islam', 'kristen', 'katolik', 'hindu', 'buddha', 'konghucu']);
             $table->enum('status_perkawinan', ['belum kawin','kawin', 'cerai hidup', 'cerai mati']);
             $table->string('pekerjaan', 100);
             $table->string('pendidikan', 50);
