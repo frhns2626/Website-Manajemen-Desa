@@ -16,16 +16,7 @@
              <span>Dashboard</span></a>
      </li>
 
-     <!-- Divider -->
-     <hr class="sidebar-divider">
-
-     <!-- Heading -->
-     <div class="sidebar-heading">
-         MANAJEMEN DATA
-     </div>
-
-
-     <!-- Nav Item - Tables -->
+    <!-- Nav Item - Tables -->
      <li class="nav-item" {{ request()->is('penduduk*') ? 'active' : '' }}>
          <a class="nav-link" href="/penduduk">
              <i class="fas fa-fw fa-table"></i>

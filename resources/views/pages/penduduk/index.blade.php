@@ -8,7 +8,6 @@
                 class="fas fa-plus fa-sm text-white-50"></i> Tambah</a>
     </div>
 
-
     {{-- {{Table}} --}}
     <div class="row">
         <div class="col">
