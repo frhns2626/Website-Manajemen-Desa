@@ -1,35 +1,75 @@
- <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+@php
+    $menus = [
+        1 => [
+            (object) [
+                'title' => 'Dashboard',
+                'path' => 'dashboard',
+                'icon' => 'fas fa-fw fa-tachometer-alt',
+            ],
+            (object) [
+                'title' => 'Penduduk',
+                'path' => 'penduduk',
+                'icon' => 'fas fa-fw fa-table',
+            ],
+            (object) [
+                'title' => 'Permintaan Akun',
+                'path' => 'permintaan-akun',
+                'icon' => 'fas fa-fw fa-user',
+            ],
+        ],
+        2 => [
+            (object) [
+                'title' => 'Dashboard',
+                'path' => 'dashboard',
+                'icon' => 'fas fa-fw fa-tachometer-alt',
+            ],
+        ],
+    ];
+@endphp
 
-     <!-- Sidebar - Brand -->
-     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-         <div class="sidebar-brand-text">Manajemen Desa</div>
-     </a>
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
 
-     <!-- Divider -->
-     <hr class="sidebar-divider my-0">
+        <div class="sidebar-brand-text">Manajemen Desa</div>
+    </a>
 
-     <!-- Nav Item - Dashboard -->
-     <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
-         <a class="nav-link" href="/dashboard">
-             <i class="fas fa-fw fa-tachometer-alt"></i>
-             <span>Dashboard</span></a>
-     </li>
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    {{-- <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
+        <a class="nav-link" href="/dashboard">
+            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <span>Dashboard</span></a>
+    </li> --}}
+
+    <!-- Divider -->
+    <!-- <hr class="sidebar-divider"> -->
+
+    <!-- Heading -->
+    <!-- <div class="sidebar-heading">
+         Manajemen Data
+     </div> -->
 
     <!-- Nav Item - Tables -->
-     <li class="nav-item" {{ request()->is('penduduk*') ? 'active' : '' }}>
-         <a class="nav-link" href="/penduduk">
-             <i class="fas fa-fw fa-table"></i>
-             <span>Penduduk</span></a>
-     </li>
-
-     <!-- Divider -->
-     <hr class="sidebar-divider d-none d-md-block">
-
-     <!-- Sidebar Toggler (Sidebar) -->
-     <div class="text-center d-none d-md-inline">
-         <button class="rounded-circle border-0" id="sidebarToggle"></button>
-     </div>
+    @foreach ($menus[auth()->user()->role_id] as $menu)
+        <li class="nav-item" {{ request()->is($menu->path . '*') ? 'active' : '' }}>
+            <a class="nav-link" href="/{{ $menu->path }}">
+                <i class="{{ $menu->icon }}"></i>
+                <span>{{ $menu->title }}</span></a>
+        </li>
+    @endforeach
 
 
- </ul>
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+
+</ul>

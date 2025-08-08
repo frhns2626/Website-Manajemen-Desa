@@ -1,0 +1,76 @@
+@extends('layouts.app')
+
+@section('content')
+    <!-- Page Heading -->
+    <div clas4s="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Data Permintaan Akun</h1>
+    </div>
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                title: "Berhasil",
+                text: "{{ session()->get('success') }}",
+                icon: "successe"
+            });
+        </script>
+    @endif
+
+    {{-- {{Table}} --}}
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div style="overflow-x: auto;">
+                        <table class="table table-bordered table-hover" style="min-width: 100%">
+                            <thead class="text-dark text-center bg-gray-400">
+                                <tr>
+                                    <th class="px-4 py-2">NO</th>
+                                    <th class="px-4 py-2">Nama</th>
+                                    <th class="px-4 py-2">Email</th>
+                                    <th class="px-4 py-2">Aksi</th>
+                                </tr>
+                            </thead>
+                            @if (count($users) < 1)
+                                <tbody>
+                                    <tr>
+                                        <td colspan="13">
+                                            <p class="pt-3 text-center">Tidak ada data</p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            @else
+                                <tbody>
+                                    @foreach ($users as $item)
+                                        <tr>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
+                                            <td>
+                                                <div class="d-flex" style="gap: 10px">
+                                                    <button type="button" class="btn btn-sm btn-success"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#konfirmasiSetuju-{{ $item->id }}">
+                                                        Setuju
+                                                    </button>
+                                                    <button type="button" class="btn btn-sm btn-danger"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#konfirmasiTolak-{{ $item->id }}">
+                                                        Tolak
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @include('pages.permintaan-akun.konfirmasi-persetujuan')
+                                        @include('pages.permintaan-akun.konfirmasi-tolak')
+                                    @endforeach
+                                </tbody>
+                            @endif
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+@endsection
