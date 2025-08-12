@@ -3,7 +3,7 @@
 @section('content')
     <!-- Page Heading -->
     <div clas4s="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Data Permintaan Akun</h1>
+        <h1 class="h3 mb-0 text-gray-800">Daftar Akun Penduduk</h1>
     </div>
 
     @if (session('success'))
@@ -11,7 +11,7 @@
             Swal.fire({
                 title: "Berhasil",
                 text: "{{ session()->get('success') }}",
-                icon: "success"
+                icon: "successe"
             });
         </script>
     @endif
@@ -28,6 +28,7 @@
                                     <th class="px-4 py-2">NO</th>
                                     <th class="px-4 py-2">Nama</th>
                                     <th class="px-4 py-2">Email</th>
+                                    <th class="px-4 py-2">Status</th>
                                     <th class="px-4 py-2">Aksi</th>
                                 </tr>
                             </thead>
@@ -47,22 +48,35 @@
                                             <td>{{ $item->name }}</td>
                                             <td>{{ $item->email }}</td>
                                             <td>
+                                                <div class="text-center">
+                                                    @if ($item->status == 'approved')
+                                                        <span class="badge badge-success">Aktif</span>
+                                                    @else
+                                                        <span class="badge badge-danger">Tidak Aktif</span>
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td>
                                                 <div class="d-flex" style="gap: 10px">
-                                                    <button type="button" class="btn btn-sm btn-success"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#konfirmasiSetuju-{{ $item->id }}">
-                                                        Setuju
-                                                    </button>
-                                                    <button type="button" class="btn btn-sm btn-danger"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#konfirmasiTolak-{{ $item->id }}">
-                                                        Tolak
-                                                    </button>
+                                                    @if ($item->status == 'approved')
+                                                        <button type="button" class="btn btn-sm btn-outline-danger"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#konfirmasiTolak-{{ $item->id }}">
+                                                            Non-aktifkan Akun
+                                                        </button>
+                                                    @else
+                                                        <button type="button" class="btn btn-sm btn-outline-success"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#konfirmasiSetuju-{{ $item->id }}">
+                                                            Aktifkan Akun
+                                                        </button>
+                                                    @endif
+
                                                 </div>
                                             </td>
                                         </tr>
-                                        @include('pages.permintaan-akun.konfirmasi-persetujuan')
-                                        @include('pages.permintaan-akun.konfirmasi-tolak')
+                                        @include('pages.daftar-akun.konfirmasi-persetujuan')
+                                        @include('pages.daftar-akun.konfirmasi-tolak')
                                     @endforeach
                                 </tbody>
                             @endif

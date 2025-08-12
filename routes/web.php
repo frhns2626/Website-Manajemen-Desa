@@ -24,5 +24,13 @@ Route::post('/penduduk', [PendudukController::class, 'store'])->middleware('role
 Route::put('/penduduk/{id}', [PendudukController::class, 'update'])->middleware('role:Admin');
 Route::delete('/penduduk/{id}', [PendudukController::class, 'destroy'])->middleware('role:Admin');
 
-Route::get('/permintaan-akun',[UserController::class, 'account_request_view']);
-Route::post('/permintaan-akun/approval/{id}',[UserController::class, 'account_approval']);
+Route::get('/daftar-akun', [UserController::class, 'account_list_view'])->middleware('role:Admin');
+
+
+Route::get('/permintaan-akun', [UserController::class, 'account_request_view'])->middleware('role:Admin');
+Route::post('/permintaan-akun/approval/{id}', [UserController::class, 'account_approval'])->middleware('role:Admin');
+
+Route::get('/profile', [UserController::class, 'profile_view'])->middleware('role:Admin,User');
+Route::post('/profile/{id}', [UserController::class, 'update_profile'])->middleware('role:Admin,User');
+Route::get('/changePassword', [UserController::class, 'changePassword_view'])->middleware('role:Admin,User');
+Route::post('/changePassword/{id}', [UserController::class, 'changePassword'])->middleware('role:Admin,User');
