@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penduduk;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,28 +13,39 @@ class UserController extends Controller
     public function account_request_view()
     {
         $users = User::where('status', 'submitted')->get();
+        $penduduks = Penduduk::where('user_id', null)->get();
         return view('pages.permintaan-akun.index', [
             'users' => $users,
+            'penduduks' => $penduduks,
         ]);
     }
     public function account_approval(Request $request, $userId)
     {
         $request->validate([
             'for' => ['required', Rule::in(['approve', 'reject', 'activate', 'deactivate'])],
+            'penduduk_id' => ['nullable', 'exists:penduduks,id']
         ]);
 
         $for = $request->input('for');
 
         $user = User::findOrFail($userId);
-        $user->status = $for == 'approve' || $for == 'activate' ? 'approved' : 'rejected';
+        $user->status = ($for == 'approve' || $for == 'activate') ? 'approved' : 'rejected';
         $user->save();
 
-        if (in_array($for, ['activate', 'deactivate'])) {
-            return back()->with('success', $for == 'activate' ? 'Berhasil Aktifkan Akun' : 'Berhasil Menonaktifkan Akun');
+        $pendudukId = $request->input('penduduk_id');
+
+        if ($request->has('penduduk_id') && isset($pendudukId)) {
+            Penduduk::where('id', $pendudukId)->update([
+                'user_id' => $user->id,
+            ]);
         }
+
+        // if (in_array($for, ['activate', 'deactivate'])) {
+        //     return back()->with('success', $for == 'activate' ? 'Berhasil Aktifkan Akun' : 'Berhasil Menonaktifkan Akun');
+        // }
         if ($for == 'activate') {
             return back()->with('success', 'Berhasil Aktifkan Akun');
-        } elseif ($for = 'deactivate') {
+        } else if ($for =='deactivate') {
             return back()->with('success', 'Berhasil Menonaktifkan Akun');
         }
 

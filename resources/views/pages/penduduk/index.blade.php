@@ -58,19 +58,26 @@
                                         <td>{{ $item->pendidikan }}</td>
                                         <td>{{ $item->status_tinggal }}</td>
                                         <td>
-                                            <div class="d-flex">
+                                            <div class="d-flex align-items-center" style="gap: 10px">
                                                 <a href="/penduduk/{{ $item->id }}"
-                                                    class="d-inline-block mr-2 btn btn-sm btn-warning">
+                                                    class="d-inline-block btn btn-sm btn-warning">
                                                     <i class="fas fa-pen"></i>
                                                 </a>
                                                 <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal"
                                                     data-bs-target="#confirmationDelete-{{ $item->id }}">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
+                                                @if (!is_null($item->user_id))
+                                                    <button type="button" class="btn btn-sm btn-outline-info"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#detailAccount-{{ $item->id }}">
+                                                    Lihat Akun</button>
+                                                @endif
                                             </div>
                                         </td>
                                     </tr>
                                     @include('pages.penduduk.konfirmasi-hapus')
+                                    @include('pages.penduduk.detail-akun')
                                 @endforeach
                             </tbody>
                         @endif

@@ -10,7 +10,7 @@
                     <h4 class="modal-title fs-5" id="konfirmasiHapusLabel">Konfirmasi Hapus</h4>
                 </div>
                 <div class="modal-body">
-                    <span>Yakin DiHapus ?</span></span>
+                    <span>Yakin DiHapus ?</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

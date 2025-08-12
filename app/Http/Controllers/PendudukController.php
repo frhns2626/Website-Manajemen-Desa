@@ -9,7 +9,7 @@ class PendudukController extends Controller
 {
     public function index()
     {
-        $penduduks = Penduduk::all();
+        $penduduks = Penduduk::with('user')->get();
         return view('pages.penduduk.index', [
             'penduduks' => $penduduks,
         ]);
