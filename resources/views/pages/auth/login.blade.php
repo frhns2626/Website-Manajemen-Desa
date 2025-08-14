@@ -25,13 +25,13 @@
 
 <body class="bg-gradient-primary">
     @if ($errors->any())
-        <script>
-            Swal.fire({
-                title: "Terjadi Kesalahan",
-                text: "@foreach ($errors->all() as $error) {{ $error }}{{ $loop->last ? '.' : ',' }} @endforeach",
-                icon: "error"
-            });
-        </script>
+    <script>
+        Swal.fire({
+            title: "Terjadi Kesalahan",
+            text: "@foreach ($errors->all() as $error) {{ $error }}{{ $loop->last ? '.' : ',' }} @endforeach",
+            icon: "error"
+        });
+    </script>
     @endif
 
     <div class="container">
@@ -50,7 +50,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user" action="/login" method="POST">
+                                    <form class="user" action="/login" method="POST" onsubmit="const submitBtn = document.getElementById('submitBtn'); submitBtn.disabled = true; submitBtn.textContent = 'Loading...'">
                                         @csrf
                                         @method('POST')
                                         <div class="form-group">
@@ -63,14 +63,15 @@
                                                 class="form-control form-control-user" id="InputPassword"
                                                 placeholder="Password">
                                         </div>
-                                        <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        <button id="submitBtn" type="submit"
+                                            class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                     </form>
                                     <hr>
 
                                     <div class="text-center">
-                                        <a class="small" href="/register">Create an Account!</a>
+                                        <a class="small" href="/register">Buat Akun Baru!</a>
                                     </div>
                                 </div>
                             </div>

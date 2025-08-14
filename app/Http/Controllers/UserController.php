@@ -12,7 +12,7 @@ class UserController extends Controller
 {
     public function account_request_view()
     {
-        $users = User::where('status', 'submitted')->get();
+        $users = User::where('status', 'submitted')->paginate(1);
         $penduduks = Penduduk::where('user_id', null)->get();
         return view('pages.permintaan-akun.index', [
             'users' => $users,
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function account_approval(Request $request, $userId)
     {
         $request->validate([
-            'for' => ['required', Rule::in(['approve', 'reject', 'activate', 'deactivate'])],
+            'for' => ['required', Rule::in(['approve', 'tolak', 'activate', 'deactivate'])],
             'penduduk_id' => ['nullable', 'exists:penduduks,id']
         ]);
 
@@ -40,9 +40,6 @@ class UserController extends Controller
             ]);
         }
 
-        // if (in_array($for, ['activate', 'deactivate'])) {
-        //     return back()->with('success', $for == 'activate' ? 'Berhasil Aktifkan Akun' : 'Berhasil Menonaktifkan Akun');
-        // }
         if ($for == 'activate') {
             return back()->with('success', 'Berhasil Aktifkan Akun');
         } else if ($for =='deactivate') {
@@ -54,7 +51,7 @@ class UserController extends Controller
 
     public function account_list_view()
     {
-        $users = User::where('role_id', 2)->where('status', '!=', 'submitted')->get();
+        $users = User::where('role_id', 2)->where('status', '!=', 'submitted')->paginate(10);
 
         return view('pages.daftar-akun.index', [
             'users' => $users,

@@ -26,7 +26,6 @@ Route::delete('/penduduk/{id}', [PendudukController::class, 'destroy'])->middlew
 
 Route::get('/daftar-akun', [UserController::class, 'account_list_view'])->middleware('role:Admin');
 
-
 Route::get('/permintaan-akun', [UserController::class, 'account_request_view'])->middleware('role:Admin');
 Route::post('/permintaan-akun/approval/{id}', [UserController::class, 'account_approval'])->middleware('role:Admin');
 

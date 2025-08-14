@@ -43,7 +43,7 @@
                             <tbody>
                                 @foreach ($penduduks as $item)
                                     <tr>
-                                        <td class="text-center">{{ $loop->iteration }}</td>
+                                        <td class="text-center">{{ $loop->iteration + $penduduks->firstItem() - 1 }}</td>
                                         <td>{{ $item->nik }}</td>
                                         <td>{{ $item->kk }}</td>
                                         <td>{{ $item->name }}</td>
@@ -71,19 +71,24 @@
                                                     <button type="button" class="btn btn-sm btn-outline-info"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#detailAccount-{{ $item->id }}">
-                                                    Lihat Akun</button>
+                                                        Lihat Akun
+                                                    </button>
+                                                    @include('pages.penduduk.detail-akun')
                                                 @endif
                                             </div>
                                         </td>
                                     </tr>
-                                    @include('pages.penduduk.konfirmasi-hapus')
-                                    @include('pages.penduduk.detail-akun')
-                                @endforeach
-                            </tbody>
+                                    @endforeach
+                                </tbody>
                         @endif
                     </table>
                 </div>
-
+                @include('pages.penduduk.konfirmasi-hapus')
+                @if ($penduduks->lastPage() > 1)
+                    <div class="card-footer">
+                        {{ $penduduks->links('pagination::bootstrap-5') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
