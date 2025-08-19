@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\PendudukController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -12,7 +13,7 @@ Route::post('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [AuthController::class, 'registerView']);
 Route::post('/register', [AuthController::class, 'register']);
 
-
+//Admin
 Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware('role:Admin,User');
@@ -33,3 +34,11 @@ Route::get('/profile', [UserController::class, 'profile_view'])->middleware('rol
 Route::post('/profile/{id}', [UserController::class, 'update_profile'])->middleware('role:Admin,User');
 Route::get('/changePassword', [UserController::class, 'changePassword_view'])->middleware('role:Admin,User');
 Route::post('/changePassword/{id}', [UserController::class, 'changePassword'])->middleware('role:Admin,User');
+
+//User
+Route::get('/complaint', [ComplaintController::class, 'index'])->middleware('role:Admin,User');
+Route::get('/complaint/create', [ComplaintController::class, 'create'])->middleware('role:User');
+Route::get('/complaint/{id}', [ComplaintController::class, 'edit'])->middleware('role:User');
+Route::post('/complaint', [ComplaintController::class, 'store'])->middleware('role:User');
+Route::put('/complaint/{id}', [ComplaintController::class, 'update'])->middleware('role:User');
+Route::delete('/complaint/{id}', [ComplaintController::class, 'destroy'])->middleware('role:User');

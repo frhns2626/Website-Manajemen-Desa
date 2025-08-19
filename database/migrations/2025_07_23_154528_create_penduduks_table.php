@@ -20,10 +20,10 @@ return new class extends Migration
             $table->string('tempat_lahir', 100);
             $table->date('tanggal_lahir');
             $table->text('alamat');
-            $table->enum('agama', ['islam', 'kristen', 'katolik', 'hindu', 'buddha', 'konghucu']);
+            $table->enum('agama', ['islam', 'kristen', 'katolik', 'hindu', 'buddha', 'konghucu'])->nullable();
             $table->enum('status_perkawinan', ['belum kawin','kawin', 'cerai hidup', 'cerai mati']);
-            $table->string('pekerjaan', 100);
-            $table->string('pendidikan', 50);
+            $table->string('pekerjaan', 100)->nullable();
+            $table->string('pendidikan', 50)->nullable();
             $table->enum('status_tinggal', ['tetap','pendatang', 'pindah', 'meninggal'])->default('tetap');
             $table->timestamps();
         });

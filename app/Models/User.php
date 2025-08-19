@@ -46,8 +46,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function penduduks()
+    public function penduduk()
     {
-        return $this->hasMany(Penduduk::class);
+        return $this->hasOne(Penduduk::class);
     }
 }
