@@ -18,6 +18,24 @@ Route::get('/dashboard', function () {
     return view('pages.dashboard');
 })->middleware('role:Admin,User');
 
+Route::get('/notifications', function () {
+    return view('pages.notifications');
+});
+Route::post('/notification/{id}/read', function ($id) {
+    $notification = \Illuminate\Support\Facades\DB::table('notifications')->where('id', $id);
+    $notification->update([
+        'read_at' => \Illuminate\Support\Facades\DB::raw('CURRENT_TIMESTAMP'),
+    ]);
+
+    $dataArray = json_decode($notification->firstOrFail()->data, true);
+
+    if (isset($dataArray['complaint_id'])) {
+        return redirect('/complaint');
+    }
+
+    return back();
+})->middleware('role:Admin,User');
+
 Route::get('/penduduk', [PendudukController::class, 'index'])->middleware('role:Admin');
 Route::get('/penduduk/create', [PendudukController::class, 'create'])->middleware('role:Admin');
 Route::get('/penduduk/{id}', [PendudukController::class, 'edit'])->middleware('role:Admin');
@@ -42,3 +60,4 @@ Route::get('/complaint/{id}', [ComplaintController::class, 'edit'])->middleware(
 Route::post('/complaint', [ComplaintController::class, 'store'])->middleware('role:User');
 Route::put('/complaint/{id}', [ComplaintController::class, 'update'])->middleware('role:User');
 Route::delete('/complaint/{id}', [ComplaintController::class, 'destroy'])->middleware('role:User');
+Route::post('/complaint/update-status/{id}', [ComplaintController::class, 'update_status'])->middleware('role:Admin');
